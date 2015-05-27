@@ -1,6 +1,5 @@
 language: java
 before_install: mvn install -DskipTests=true -DfinalName=stanbol-p3-$TRAVIS_TAG
-install: mvn test -P -noTest -B
 deploy:
   provider: releases
   api_key:
