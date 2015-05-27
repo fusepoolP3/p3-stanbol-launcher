@@ -58,6 +58,9 @@
     </properties>
 
     <modules>
+        <!-- unrelease fusepool projects as submodules -->
+        <module>stanbol-enhancer-adapter</module>
+        <module>datatxt-stanbol</module>
         <!-- The Open NLP POS tagging models -->
         <module>data/opennlp-pos</module>
         <module>bundlelist/fusepool</module>
