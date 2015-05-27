@@ -3,7 +3,7 @@ before_install: mvn install -DskipTests=true -DfinalName=stanbol-p3-$TRAVIS_TAG
 deploy:
   provider: releases
   api_key:
-    secure: qlcTO2vnhOeBzNYShbZ5Qr14AeUtQMMT47wUuaH2X3iX6jQDSdHVTmxWx6A5DrFqWYC/YIHGbo20sf8shI/pt3WIszGw6T36LXqP/B+sLy1DefC4/usn0P1gU+JJ59mD3bIuUROcb+GdXDfGE3GASghTEUM+fdfl7zjisVboR6M=
+    secure: MpxZdOILe/3s7le5C2SPFHpkB518v6P+KwQ1X1aWkE6w0g0qaxrQkg/uAjweCGg4+44K/NG1XVN3w+dyA+a3ii0F1eRoxrIECULhmD7eBTMOqhLcAzSlcL6fQojG6BnbY9tFknuCLb9awVQJgwwLj7D27YWRJJhyApKowy5lg9o=
   file: webapp/target/stanbol-p3-$TRAVIS_TAG.jar
   on:
     repo: fusepoolP3/p3-stanbol-launcher
