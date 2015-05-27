@@ -50,6 +50,12 @@
         <url>https://github.com/fusepoolP3/p3-stanbol-launcher</url>
     </scm>
 
+    <properties>
+      <stanbol-version>1.0.0-SNAPSHOT</stanbol-version>
+      <jetty-version>3.0.2</jetty-version>
+      <felix-servlet-api-version>1.1.0</felix-servlet-api-version>
+      <slf4j-version>1.7.12</slf4j-version>
+    </properties>
 
     <modules>
         <!-- The Open NLP POS tagging models -->
@@ -60,10 +66,6 @@
     
     <build>
       <plugins>
-        <plugin>
-          <groupId>org.apache.felix</groupId>
-          <artifactId>maven-scr-plugin</artifactId>
-        </plugin>
         <!-- requires Java 7 -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -114,12 +116,12 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>2.3.1</version>
+            <version>3.3</version>
           </plugin>
           <plugin>
             <groupId>org.apache.felix</groupId>
             <artifactId>maven-bundle-plugin</artifactId>
-            <version>2.3.7</version>
+            <version>2.5.4</version>
             <inherited>true</inherited>
             <configuration>
               <instructions>
@@ -136,14 +138,14 @@
           <plugin>
             <groupId>org.apache.felix</groupId>
             <artifactId>maven-scr-plugin</artifactId>
-            <version>1.16.0</version>
+            <version>1.21.0</version>
             <!-- slf4j impl is needed when QDox inspects/loads classes that use a
              static field for the logger, so that those classes can be loaded. -->
             <dependencies>
               <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
-                <version>1.6.1</version>
+                <version>${slf4j-version}</version>
               </dependency>
             </dependencies>
             <executions>
@@ -163,35 +165,220 @@
           <plugin>
             <groupId>org.apache.sling</groupId>
             <artifactId>maven-sling-plugin</artifactId>
-            <version>2.0.6</version>
+            <version>2.1.0</version>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-enforcer-plugin</artifactId>
-            <version>1.0.1</version>
+            <version>1.4</version>
           </plugin>
-          
+          <plugin>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>maven-launchpad-plugin</artifactId>
+            <version>2.3.2</version>
+            <extensions>true</extensions>
+          </plugin>
+          <!-- generates version number of dependencies suitable for introspection
+           in pax-exam based OSGi lightweight-integration tests -->
+          <plugin>
+            <groupId>org.apache.servicemix.tooling</groupId>
+            <artifactId>depends-maven-plugin</artifactId>
+            <version>1.2</version>
+            <executions>
+              <execution>
+                <id>generate-depends-file</id>
+                <goals>
+                  <goal>generate-depends-file</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <configuration>
+              <target>
+                <property name="vm.args" value=""/>
+                <java fork="true" jar="${project.build.directory}/${project.build.finalName}.jar"
+                  dir="${project.build.directory}">
+                  <jvmarg line="-Xmx1024m -XX:MaxPermSize=256M ${vm.args}"/>
+                </java>
+              </target>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-shade-plugin</artifactId>
+            <version>2.3</version>
+          </plugin>
+          <plugin>
+            <groupId>org.wymiwyg.karaf.tooling</groupId>
+            <artifactId>karaf-sling-maven-plugin</artifactId>
+            <version>3.0.1</version>
+            <extensions>true</extensions>
+            <configuration>
+              <startLevel>10</startLevel>
+              <aggregateFeatures>true</aggregateFeatures>
+              <resolver>(obr)</resolver>
+              <checkDependencyChange>false</checkDependencyChange>
+              <includeTransitiveDependency>false</includeTransitiveDependency>
+              <createSlingPartialBundleList>true</createSlingPartialBundleList>
+            </configuration>
+          </plugin>
         </plugins>
       </pluginManagement>
     </build>
+    
+    <dependencyManagement>
+      <dependencies>
+        
+        
+        <!-- Sling -->
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.launchpad.base</artifactId>
+          <version>5.0.0-2.6.0</version>
+          <classifier>app</classifier>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.launchpad.installer</artifactId>
+          <version>1.2.2</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.launchpad.api</artifactId>
+          <version>1.1.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.installer.api</artifactId>
+          <version>1.0.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.sling</groupId>
+          <artifactId>org.apache.sling.installer.core</artifactId>
+          <version>3.6.4</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>org.apache.felix.scr.annotations</artifactId>
+          <version>1.9.12</version>
+          <scope>provided</scope>
+        </dependency>
+        <!-- Stanbol -->
+        <dependency>
+          <!-- The Apache Stanbol lauchpad -->
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.commons.launchpad</artifactId>
+          <version>${stanbol-version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.osgiframework</artifactId>
+          <version>${stanbol-version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.stanbolcommons</artifactId>
+          <version>${stanbol-version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.enhancer</artifactId>
+          <version>${stanbol-version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub</artifactId>
+          <version>${stanbol-version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub.sesame</artifactId>
+          <version>${stanbol-version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+
+        <!-- Clerezza -->
+        <dependency>
+          <groupId>org.apache.clerezza.provisioning</groupId>
+          <artifactId>rdf</artifactId>
+          <version>0.1</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.clerezza.provisioning</groupId>
+          <artifactId>rdf.tdb</artifactId>
+          <version>0.1</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+
+        <!-- Fusepool specofic -->
+        <dependency>
+          <groupId>eu.fusepool.p3</groupId>
+          <artifactId>vocab</artifactId>
+          <version>0.2</version>
+        </dependency>
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-enhancer-adapter</groupId>
+          <artifactId>stanbol-enhancer-adapter-service</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-enhancer-adapter</groupId>
+          <artifactId>stanbol-config-service</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-engines-fise2fam</groupId>
+          <artifactId>stanbol-engines-fise2fam</artifactId>
+          <version>1.0.0</version>
+        </dependency>
+        <dependency>
+          <groupId>eu-spaziodati</groupId>
+          <artifactId>datatxt-stanbol</artifactId>
+          <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+
+
+      </dependencies>
+    </dependencyManagement>
 
 
 
     <!-- currently using some stanbol snapshost -->
     <repositories>
-        <repository>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <id>apache.snapshots</id>
-            <name>Apache Snapshot Repository</name>
-            <url>http://repository.apache.org/snapshots</url>
-        </repository>
+      <repository>
+        <id>apache.releases</id>
+        <name>Apache Relesases Repository</name>
+        <url>https://repository.apache.org/content/repositories/releases/</url>
+      </repository>
+      <repository>
+        <id>apache.snapshots</id>
+        <name>Apache Snapshots Repository</name>
+        <url>https://repository.apache.org/content/repositories/snapshots/</url>
+        <releases>
+          <enabled>false</enabled>
+        </releases>
+        <snapshots>
+          <enabled>true</enabled>
+        </snapshots>
+      </repository>
     </repositories>
-    
+
     <profiles>
       <profile>
         <!--
