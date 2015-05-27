@@ -1,0 +1,11 @@
+language: java
+before_install: mvn install -DskipTests=true -DfinalName=stanbol-p3-$TRAVIS_TAG
+deploy:
+  provider: releases
+  api_key:
+    secure: qlcTO2vnhOeBzNYShbZ5Qr14AeUtQMMT47wUuaH2X3iX6jQDSdHVTmxWx6A5DrFqWYC/YIHGbo20sf8shI/pt3WIszGw6T36LXqP/B+sLy1DefC4/usn0P1gU+JJ59mD3bIuUROcb+GdXDfGE3GASghTEUM+fdfl7zjisVboR6M=
+  file: webapp/target/stanbol-p3-$TRAVIS_TAG.jar
+  on:
+    repo: fusepoolP3/p3-stanbol-launcher
+    tags: true
+    all_branches: true
