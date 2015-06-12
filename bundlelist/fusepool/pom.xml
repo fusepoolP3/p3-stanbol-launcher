@@ -49,11 +49,6 @@
             <artifactId>vocab</artifactId>
         </dependency>
         <dependency>
-            <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
-            <artifactId>stanbol-data-opennlp-pos</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>eu.fusepool.p3.stanbol-engines-fise2fam</groupId>
             <artifactId>stanbol-engines-fise2fam</artifactId>
         </dependency>

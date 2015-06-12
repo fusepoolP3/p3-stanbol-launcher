@@ -142,49 +142,61 @@
             <classifier>app</classifier>
         </dependency>
 
+        <!-- FUSEPOOL BUNDLELISTS -->
+
         <!-- Fusepool Launcher specific Bundle List -->
-        <dependency>
+        <dependency> <!-- required -->
           <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
           <artifactId>stanbol-launcher-fusepool-bundlelist</artifactId>
           <version>${project.version}</version>
           <type>partialbundlelist</type>
           <scope>provided</scope>
         </dependency>
+        <!-- NLP Models for the Fusepool Launcher -->
+        <dependency> <!-- optional -->
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-launcher-nlp-data-bundlelist</artifactId>
+          <version>${project.version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
         
-        <!-- Clerezza Bundlelists -->
-        <dependency>
+        <!-- FUSEPOOL BUNDLELISTS -->
+        
+        <dependency> <!-- required -->
           <groupId>org.apache.clerezza.provisioning</groupId>
           <artifactId>rdf</artifactId>
           <type>partialbundlelist</type>
         </dependency>
-        <dependency>
+        <dependency> <!-- optional -->
           <groupId>org.apache.clerezza.provisioning</groupId>
           <artifactId>rdf.tdb</artifactId>
           <type>partialbundlelist</type>
         </dependency>
 
-        <!-- Stanbol Bundlelists -->
-        <dependency>
+        <!-- STANBOL BUNDLELISTS -->
+        
+        <dependency> <!-- required -->
             <groupId>org.apache.stanbol</groupId>
             <artifactId>org.apache.stanbol.launchers.bundlelists.osgiframework</artifactId>
             <type>partialbundlelist</type>
         </dependency>
-        <dependency>
+        <dependency> <!-- required -->
             <groupId>org.apache.stanbol</groupId>
             <artifactId>org.apache.stanbol.launchers.bundlelists.stanbolcommons</artifactId>
             <type>partialbundlelist</type>
         </dependency>
-        <dependency>
+        <dependency> <!-- required -->
             <groupId>org.apache.stanbol</groupId>
             <artifactId>org.apache.stanbol.launchers.bundlelists.enhancer</artifactId>
             <type>partialbundlelist</type>
         </dependency>
-        <dependency>
+        <dependency> <!-- required -->
             <groupId>org.apache.stanbol</groupId>
             <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub</artifactId>
             <type>partialbundlelist</type>
         </dependency>
-        <dependency>
+        <dependency> <!-- optional -->
           <groupId>org.apache.stanbol</groupId>
           <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub.sesame</artifactId>
           <type>partialbundlelist</type>
