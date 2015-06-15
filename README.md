@@ -14,6 +14,15 @@ This Launcher is based on the `1.0.0-SNAPSHOT` (trunk) version of Apache Stanbol
 * [Fusepool Transformer Adapter](https://github.com/fusepoolP3/p3-stanbol-enhancer-adapter/tree/master/service) allowing to use Stanbol Enhancer Chains and Engines as Fusepool Transformers.
 * [Fusepool Configuration Service](https://github.com/fusepoolP3/p3-stanbol-enhancer-adapter/tree/master/config) allowing to configure a Stanbol Instance for a Fusepool Platform during the installation process of Fusepool.
 
+## Try it out
+
+First, obtain the latest [release](https://github.com/fusepoolP3/p3-stanbol-launcher/releases/latest).
+
+Next, start the transformer:
+
+    java -jar stanbol-p3-*.jar
+
+You can then access the Stanbol webinterface (including links to the Fusepool-transformers) using a webbrowser pointing to [http://localhost:8080/](http://localhost:8080/)
 
 ## Compiling and Running
 
