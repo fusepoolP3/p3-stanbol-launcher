@@ -1,4 +1,4 @@
-# Fusepool Stanbol Launcher
+# Fusepool Stanbol Launcher  [![Build Status](https://travis-ci.org/fusepoolP3/p3-stanbol-launcher.svg)](https://travis-ci.org/fusepoolP3/p3-stanbol-launcher)
 
 A custom Apache Stanbol Launcher for the Fusepool Plattform.
 
