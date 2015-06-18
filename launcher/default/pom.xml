@@ -24,7 +24,7 @@
       <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
       <artifactId>stanbol-launcher-reactor</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-      <relativePath>..</relativePath>
+      <relativePath>../..</relativePath>
     </parent>
 
     <artifactId>stanbol-launcher</artifactId>
