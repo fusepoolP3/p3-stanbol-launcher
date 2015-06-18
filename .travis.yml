@@ -4,7 +4,7 @@ deploy:
   provider: releases
   api_key:
     secure: nVLcmK/5bNoSMhuJnKj30Ub8qvmoYDHXbHsP2V2uBn3Xl93JpN33vj7XHc96GLSji2BEvQC+z8Mz+IoWxB2h/yWvg3yO965AVA4rygG3T/1YCrWd7WCgunaQJ8wyv3DQAWptMU/m12MsHiO5ejGVngrUYqxvRxZw5d0dSWPI/uU=
-  file: launcher/target/stanbol-p3-$TRAVIS_TAG.jar
+  file: launcher/default/target/stanbol-p3-$TRAVIS_TAG.jar
   on:
     repo: fusepoolP3/p3-stanbol-launcher
     tags: true
