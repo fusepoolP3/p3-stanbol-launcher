@@ -35,7 +35,7 @@ Currently their are two launcher configuration - _(1) core_ and _(2) default_. F
 
 Next, start the transformer:
 
-    java -jar -Xmx8g stanbol-launcher-*.jar -p 8304
+    java -jar -Xmx8g stanbol-p3-*.jar -p 8304
 
 You can then access the Stanbol webinterface (including links to the Fusepool-transformers) using a webbrowser pointing to [http://localhost:8304/](http://localhost:8304/)
 
