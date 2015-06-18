@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2014 Bern University of Applied Sciences..
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+      <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+      <artifactId>stanbol-launcher-reactor</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>stanbol-launcher-core</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Fusepool P3: Core Stanbol Launcher</name>
+    <description>
+      Core Fusepool P3 Stanbol Launcher. This launcher only includes the Stanbol
+      Enhancer and Entityhub as well as Fusepool P3 specific extensions. It does
+      NOT include any data, default configuration nor demos.
+    </description>
+
+    <properties>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </properties>
+
+    <build>
+        <finalName>${finalName}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>.</directory>
+                            <includes>
+                                <include>stanbol/**</include>
+                                <include>*.log</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>maven-launchpad-plugin</artifactId>
+                <!--
+                  TODO the maven-launchpad-plugin can also generate a war file and
+                  Karaf description, we could add this. See
+                  http://sling.apache.org/site/maven-launchpad-plugin.html
+                -->
+                <executions>
+                    <execution>
+                        <id>prepare-package</id>
+                        <goals>
+                            <goal>prepare-package</goal>
+                        </goals>
+                        <configuration>
+                            <includeDefaultBundles>false</includeDefaultBundles>
+                            <!-- Standalone jar requires an OSGi http service implementation -->
+                            <jarWebSupport>
+                                <bundles>
+                                    <bundle>
+                                        <groupId>org.apache.felix</groupId>
+                                        <artifactId>org.apache.felix.http.jetty</artifactId>
+                                        <startLevel>1</startLevel>
+                                        <version>${jetty-version}</version>
+                                    </bundle>
+                                    <bundle>
+                                        <groupId>org.apache.felix</groupId>
+                                        <artifactId>org.apache.felix.http.servlet-api</artifactId>
+                                        <startLevel>1</startLevel>
+                                        <version>${felix-servlet-api-version}</version>
+                                    </bundle>
+                                </bundles>
+                            </jarWebSupport>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>org.apache.stanbol.launchpad.Main</mainClass>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <artifactSet>
+                                <!-- Use this to in/exclude only specific dependencies -->
+                                <includes>
+                                    <include>org.apache.stanbol:org.apache.stanbol.commons.launchpad</include>
+                                    <include>org.apache.sling:org.apache.sling.launchpad.base</include>
+                                </includes>
+                            </artifactSet>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <!-- The Apache Stanbol lauchpad -->
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.commons.launchpad</artifactId>
+        </dependency>
+        <dependency>
+            <!-- maven-launchpad-plugin builds on the launchpad.base app -->
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.launchpad.base</artifactId>
+            <classifier>app</classifier>
+        </dependency>
+
+        <!-- FUSEPOOL BUNDLELISTS -->
+
+        <!-- Fusepool Launcher specific Bundle List -->
+        <dependency> <!-- required -->
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-launcher-fusepool-bundlelist</artifactId>
+          <version>${project.version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
+        <!-- NLP Models for the Fusepool Launcher -->
+        <!-- NOT PART of the Minimal Launcher -
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-launcher-nlp-data-bundlelist</artifactId>
+          <version>${project.version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency> -->
+        
+        <!-- FUSEPOOL BUNDLELISTS -->
+        
+        <dependency> <!-- required -->
+          <groupId>org.apache.clerezza.provisioning</groupId>
+          <artifactId>rdf</artifactId>
+          <type>partialbundlelist</type>
+        </dependency>
+        <dependency> <!-- optional -->
+          <groupId>org.apache.clerezza.provisioning</groupId>
+          <artifactId>rdf.tdb</artifactId>
+          <type>partialbundlelist</type>
+        </dependency>
+
+        <!-- STANBOL BUNDLELISTS -->
+        
+        <dependency> <!-- required -->
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.launchers.bundlelists.osgiframework</artifactId>
+            <type>partialbundlelist</type>
+        </dependency>
+        <dependency> <!-- required -->
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.launchers.bundlelists.stanbolcommons</artifactId>
+            <type>partialbundlelist</type>
+        </dependency>
+        <dependency> <!-- required -->
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.launchers.bundlelists.enhancer</artifactId>
+            <type>partialbundlelist</type>
+        </dependency>
+        <dependency> <!-- required -->
+            <groupId>org.apache.stanbol</groupId>
+            <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub</artifactId>
+            <type>partialbundlelist</type>
+        </dependency>
+        <dependency> <!-- optional -->
+          <groupId>org.apache.stanbol</groupId>
+          <artifactId>org.apache.stanbol.launchers.bundlelists.entityhub.sesame</artifactId>
+          <type>partialbundlelist</type>
+        </dependency>
+        
+    </dependencies>
+
+</project>

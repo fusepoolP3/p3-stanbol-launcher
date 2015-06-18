@@ -72,7 +72,8 @@
         <module>bundlelist/nlp-models</module>
         
         <!-- Launchers -->
-        <module>launcher</module>
+        <module>launcher/core</module>
+        <module>launcher/default</module>
     </modules>
     
     <build>
