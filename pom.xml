@@ -62,14 +62,21 @@
         <module>stanbol-enhancer-adapter</module>
         <module>datatxt-stanbol</module>
         
-        <!-- The Open NLP POS tagging models -->
+        <!-- Data modules -->
+        <!-- NLP models -->
         <module>data/opennlp-pos</module>
         <module>data/opennlp-ner</module>
         <module>data/ixa-nerc</module>
+        <!-- Linked Data Sites -->
+        <module>data/site-iptc</module>
+        <module>data/site-stw</module>
+        <module>data/site-thesoz</module>
+        
         
         <!-- Bundlelists -->
         <module>bundlelist/fusepool</module>
         <module>bundlelist/nlp-models</module>
+        <module>bundlelist/ld-sites</module>
         
         <!-- Launchers -->
         <module>launcher/core</module>

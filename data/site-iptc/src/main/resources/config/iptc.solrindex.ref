@@ -1,0 +1,5 @@
+#Mon Jun 29 12:21:02 CEST 2015
+Name=SolrIndex for iptc
+Synchronized=true
+Description=IPTC Media Topics
+Index-Archive=iptc.solrindex.zip

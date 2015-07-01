@@ -1,0 +1,5 @@
+#Mon Jun 29 10:25:35 CEST 2015
+Name=SolrIndex for stw
+Synchronized=true
+Description=Standard-Thesaurus Wirtschaft
+Index-Archive=stw.solrindex.zip

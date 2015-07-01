@@ -1,0 +1,5 @@
+#Mon Jun 29 10:35:28 CEST 2015
+Name=SolrIndex for thesoz
+Synchronized=true
+Description=Thesaurus for the Social Sciences
+Index-Archive=thesoz.solrindex.zip

@@ -165,8 +165,18 @@
           <type>partialbundlelist</type>
           <scope>provided</scope>
         </dependency> -->
-        
-        <!-- FUSEPOOL BUNDLELISTS -->
+        <!-- Linked Data Vocabularies indexed for Entity Linking -->
+        <!-- NOT PART of the Minimal Launcher -
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-launcher-ld-sites-bundlelist</artifactId>
+          <version>${project.version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency> -->
+
+
+        <!-- CLEREZZA BUNDLELISTS -->
         
         <dependency> <!-- required -->
           <groupId>org.apache.clerezza.provisioning</groupId>

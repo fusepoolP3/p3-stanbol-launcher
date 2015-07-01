@@ -167,8 +167,16 @@
           <type>partialbundlelist</type>
           <scope>provided</scope>
         </dependency>
+        <!-- Linked Data Vocabularies indexed for Entity Linking -->
+        <dependency> <!-- optional -->
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-launcher-ld-sites-bundlelist</artifactId>
+          <version>${project.version}</version>
+          <type>partialbundlelist</type>
+          <scope>provided</scope>
+        </dependency>
         
-        <!-- FUSEPOOL BUNDLELISTS -->
+        <!-- CLEREZZA BUNDLELISTS -->
         
         <dependency> <!-- required -->
           <groupId>org.apache.clerezza.provisioning</groupId>
