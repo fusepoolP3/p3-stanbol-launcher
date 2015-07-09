@@ -1,0 +1,5 @@
+#Tue Jul 07 11:19:45 CEST 2015
+Name=SolrIndex for gnd
+Synchronized=true
+Description=Integrated Authority File (GND) Concepts
+Index-Archive=gnd.solrindex.zip

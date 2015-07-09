@@ -71,6 +71,7 @@
         <module>data/site-iptc</module>
         <module>data/site-stw</module>
         <module>data/site-thesoz</module>
+        <module>data/site-gnd</module>
         
         
         <!-- Bundlelists -->
@@ -221,7 +222,7 @@
                 <property name="vm.args" value=""/>
                 <java fork="true" jar="${project.build.directory}/${project.build.finalName}.jar"
                   dir="${project.build.directory}">
-                  <jvmarg line="-Xmx1024m -XX:MaxPermSize=256M ${vm.args}"/>
+                  <jvmarg line="-Xmx8g ${vm.args}"/>
                 </java>
               </target>
             </configuration>

@@ -53,6 +53,11 @@
           <artifactId>stanbol-data-site-thesoz</artifactId>
           <version>${project.version}</version>
         </dependency>
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol-launcher</groupId>
+          <artifactId>stanbol-data-site-gnd</artifactId>
+          <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
