@@ -61,6 +61,7 @@
         <!-- unrelease fusepool projects as submodules -->
         <module>stanbol-enhancer-adapter</module>
         <module>datatxt-stanbol</module>
+        <module>redlink-stanbol</module>
         
         <!-- Data modules -->
         <!-- NLP models -->
