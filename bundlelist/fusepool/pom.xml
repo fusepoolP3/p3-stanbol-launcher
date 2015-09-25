@@ -56,6 +56,12 @@
           <groupId>eu-spaziodati</groupId>
           <artifactId>datatxt-stanbol</artifactId>
         </dependency>
+        <dependency>
+          <groupId>eu.fusepool.p3.stanbol</groupId>
+          <artifactId>stanbol-engines-redlink</artifactId>
+        </dependency>
+        
+          
     </dependencies>
 
     <build>
