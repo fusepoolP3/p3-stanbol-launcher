@@ -95,6 +95,9 @@
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <includeDefaultBundles>false</includeDefaultBundles>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
