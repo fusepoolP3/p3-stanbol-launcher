@@ -67,6 +67,9 @@
                   Karaf description, we could add this. See
                   http://sling.apache.org/site/maven-launchpad-plugin.html
                 -->
+                <configuration>
+                    <includeDefaultBundles>false</includeDefaultBundles>
+                </configuration>
                 <executions>
                     <execution>
                         <id>prepare-package</id>
