@@ -12,4 +12,5 @@ COPY ./ /usr/src/app
 RUN mvn install -DfinalName=stanbol-p3
 
 ENTRYPOINT ["java"]
+# The default launcher with all the NLP models needs about 8GByte Heap
 CMD ["-jar", "-Xmx8g", "launcher/default/target/stanbol-p3.jar"]
