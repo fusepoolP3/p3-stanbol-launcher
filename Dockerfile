@@ -12,4 +12,4 @@ COPY ./ /usr/src/app
 RUN mvn install -DfinalName=stanbol-p3
 
 ENTRYPOINT ["java"]
-CMD ["-jar", "launcher/default/target/stanbol-p3.jar"]
+CMD ["-jar", "-Xmx8g", "launcher/default/target/stanbol-p3.jar"]
